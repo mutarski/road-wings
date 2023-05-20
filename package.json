@@ -9,8 +9,24 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/eslint-parser": "^7.21.8",
     "@nuxt/image-edge": "^1.0.0-28050764.aaee7ac",
+    "@nuxtjs/eslint-config": "^12.0.0",
+    "@nuxtjs/eslint-module": "^4.1.0",
     "@types/node": "^18",
-    "nuxt": "^3.4.3"
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "nuxt": "^3.4.3",
+    "nuxt-vite": "^0.3.5"
+  },
+  "dependencies": {
+    "core-js": "^3.30.2",
+    "sass": "^1.62.1",
+    "sass-loader": "^13.2.2",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.1"
   }
 }

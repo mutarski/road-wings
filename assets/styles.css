@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap');
 
 @font-face {
-  font-family: "Bradley Hand ITC";
-  src: url("/assets/fonts/bradley-hand-itc.ttf") format("truetype");
+  font-family: 'Bradley Hand ITC';
+  src: url('/assets/fonts/bradley-hand-itc.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -10,14 +10,15 @@
 :root {
   --primary: rgb(128, 0, 32);
   --primaryRGB: 128, 0, 32;
-  --secondary: #f5a201;
+  --secondary: rgb(244, 163, 1);
+  --secondaryRGB: 244, 163, 1;
   --light: #faf5d2;
   --darkBlue: rgb(29, 37, 112);
   --darkBlueRGB: 29, 37, 112;
 }
 
 body {
-  font-family: "Open Sans", "Bradley Hand ITC";
+  font-family: 'Open Sans', 'Bradley Hand ITC';
   margin: 0;
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="carousel-view">
     <transition-group tag="div" class="d-flex">
-      <div :key="imagePath" class="slide" v-for="imagePath in slides">
+      <div :key="imagePath" v-for="imagePath in slides" class="slide">
         <nuxt-img class="vw-100 h-100 object-fit-cover" :src="imagePath" />
       </div>
     </transition-group>
@@ -15,10 +15,10 @@
 </template>
 
 <script>
-import constants from "../constants.js";
+import constants from '../constants.js'
 
 export default {
-  name: "Slider",
+  name: 'Slider',
   props: {
     items: Array,
   },
@@ -27,30 +27,43 @@ export default {
       current: 1,
       direction: 1,
       slides: constants.homeSlides,
-    };
+      timeoutId: null,
+    }
   },
   computed: {
     currentSlideSrc() {
-      return `/images/SLIDE${this.current}.jpg`;
+      return `/images/SLIDE${this.current}.jpg`
     },
+  },
+  mounted() {
+    this.autoNext()
   },
   methods: {
     next() {
       this.current =
-        this.current === this.slides.length ? 1 : (this.current += 1);
-      console.log("current slide", this.current);
-      const first = this.slides.shift();
-      this.slides = this.slides.concat(first);
+        this.current === this.slides.length ? 1 : (this.current += 1)
+      const first = this.slides.shift()
+      this.slides = this.slides.concat(first)
+      this.resetAutoNext()
     },
     previous() {
       this.current =
-        this.current === 1 ? this.slides.length : (this.current -= 1);
-      console.log("current slide", this.current);
-      const last = this.slides.pop();
-      this.slides = [last].concat(this.slides);
+        this.current === 1 ? this.slides.length : (this.current -= 1)
+      const last = this.slides.pop()
+      this.slides = [last].concat(this.slides)
+      this.resetAutoNext()
+    },
+    autoNext() {
+      this.timeoutId = setTimeout(() => {
+        this.next()
+      }, 5000)
+    },
+    resetAutoNext() {
+      clearTimeout(this.timeoutId)
+      this.autoNext()
     },
   },
-};
+}
 </script>
 
 <style scoped>
@@ -113,17 +126,20 @@ export default {
 }
 
 .carousel-view > div > .slide:nth-child(2) > img {
-  animation: zoom 20s;
+  animation-name: zoom;
+  animation-duration: 40s;
   z-index: -1;
 }
 
 .carousel-view > div > .slide:nth-child(3) > img {
-  animation: zoom 20s;
+  animation-name: zoom;
+  animation-duration: 40s;
   z-index: 1;
 }
 
 .carousel-view > div > .slide:nth-child(4) > img {
-  animation: zoom 20s;
+  animation-name: zoom;
+  animation-duration: 40s;
   z-index: -1;
 }
 </style>
