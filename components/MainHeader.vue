@@ -94,7 +94,7 @@ a {
 }
 
 .header__list * {
-  transition: all 0.35s ease;
+  transition: all 0.3s ease;
 }
 
 .header__item {
@@ -106,6 +106,7 @@ a {
 
   & > a {
     padding-right: 2.5rem;
+    padding-left: 1rem;
     color: rgba(255, 255, 255, 0.8);
     position: relative;
     display: inline-block;
@@ -115,8 +116,8 @@ a {
   & > a:before,
   a:after {
     position: absolute;
-    -webkit-transition: all 0.35s ease;
-    transition: all 0.35s ease;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
   }
 
   & > a:before {
@@ -131,10 +132,11 @@ a {
   & > a:after {
     position: absolute;
     padding-right: 2.5rem;
+    padding-left: 1rem;
     right: 100%;
     top: 0;
     content: attr(data-hover);
-    color: white;
+    color: var(--secondary);
     white-space: nowrap;
   }
 }
