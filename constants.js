@@ -1,9 +1,9 @@
 export default {
   homeSlides: [
-    '/images/SLIDE0.jpg',
-    '/images/SLIDE1.jpg',
-    '/images/SLIDE2.jpg',
-    '/images/SLIDE3.jpg',
-    '/images/SLIDE4.jpg',
+    'SLIDE0.jpg',
+    'SLIDE1.jpg',
+    'SLIDE2.jpg',
+    'SLIDE3.jpg',
+    'SLIDE4.jpg',
   ],
 }

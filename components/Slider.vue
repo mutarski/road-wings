@@ -1,8 +1,8 @@
 <template>
   <div class="carousel-view">
     <transition-group tag="div" class="d-flex">
-      <div :key="imagePath" v-for="imagePath in slides" class="slide">
-        <nuxt-img class="vw-100 h-100 object-fit-cover" :src="imagePath" />
+      <div :key="url" v-for="url in slides" class="slide">
+        <img class="vw-100 h-100 object-fit-cover" :src="url" />
       </div>
     </transition-group>
     <div class="btn btn-prev" aria-label="Previous slide" @click="previous">
@@ -26,22 +26,21 @@ export default {
     return {
       current: 1,
       direction: 1,
-      slides: constants.homeSlides,
       timeoutId: null,
+      slides: null,
     }
   },
-  computed: {
-    currentSlideSrc() {
-      return `/images/SLIDE${this.current}.jpg`
-    },
-  },
+  computed: {},
   mounted() {
+    this.slides = this.imagesUrls()
     this.autoNext()
   },
   methods: {
     next() {
       this.current =
         this.current === this.slides.length ? 1 : (this.current += 1)
+      console.log('this.current', this.current)
+      console.log('this.slides', this.slides)
       const first = this.slides.shift()
       this.slides = this.slides.concat(first)
       this.resetAutoNext()
@@ -62,6 +61,17 @@ export default {
       clearTimeout(this.timeoutId)
       this.autoNext()
     },
+    imagesUrls() {
+      let urls = []
+      console.log(constants.homeSlides)
+      constants.homeSlides.forEach((imageFileName) => {
+        const path = `../images/${imageFileName}`
+        const imageUrl = new URL(path, import.meta.url).href
+        urls.push(imageUrl)
+      })
+      console.log(urls)
+      return urls
+    },
   },
 }
 </script>
@@ -81,7 +91,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.4s ease-in-out;
 }
 
 .slide:first-of-type {

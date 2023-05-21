@@ -17,7 +17,7 @@ export default {
 <template>
   <header>
     <nav class="d-flex header__nav justify-between">
-      <nuxt-img class="header__logo" src="/wing.png" />
+      <img class="header__logo" src="/wing.png" />
       <ul
         class="header__list d-flex justify-end"
         :class="{ 'header__mobile-list': isMenuOpen }"
@@ -125,7 +125,7 @@ a {
     width: 2rem;
     height: 2rem;
     content: '';
-    background-image: url('bike.svg');
+    background-image: url('/bike.svg');
     background-size: 2rem 2rem;
   }
 
