@@ -11,7 +11,7 @@
   "devDependencies": {
     "@babel/core": "^7.21.8",
     "@babel/eslint-parser": "^7.21.8",
-    "@nuxt/image-edge": "^1.0.0-28050764.aaee7ac",
+    "@nuxt/image-edge": "^1.0.0-28088649.74a91bd",
     "@nuxtjs/eslint-config": "^12.0.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@types/node": "^18",
