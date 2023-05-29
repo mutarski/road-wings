@@ -9,7 +9,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.8",
+    "@babel/core": "^7.22.1",
     "@babel/eslint-parser": "^7.21.8",
     "@nuxt/image-edge": "^1.0.0-28050764.aaee7ac",
     "@nuxtjs/eslint-config": "^12.0.0",
