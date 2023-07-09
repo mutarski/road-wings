@@ -1,8 +1,22 @@
 <template>
   <div class="carousel-view">
-    <transition-group tag="div" class="d-flex">
-      <div :key="url" v-for="url in slides" class="slide">
-        <img class="vw-100 h-100 object-fit-cover" :src="url" />
+    <transition-group
+      tag="div"
+      class="d-flex"
+      @transitionend="handleAnimationEnd"
+    >
+      <div
+        v-for="(slide, index) in items"
+        class="Slider__slide"
+        :class="getSlideClass(index, currentSlideIndex, direction)"
+        :key="slide.url"
+      >
+        <img class="vw-100 h-100 object-fit-cover" :src="slide.url" />
+        <p
+          class="Slider__slide-title position-absolute position-center text-center"
+        >
+          {{ slide.title }}
+        </p>
       </div>
     </transition-group>
     <div class="btn btn-prev" aria-label="Previous slide" @click="previous">
@@ -15,42 +29,57 @@
 </template>
 
 <script>
-import constants from '../constants.js'
-
 export default {
   name: 'Slider',
   props: {
-    items: Array,
+    items: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
-      current: 1,
+      currentSlideIndex: 0,
+      lastSlideIndex: 4,
       direction: 1,
       timeoutId: null,
       slides: null,
     }
   },
-  computed: {},
   mounted() {
-    this.slides = this.imagesUrls()
-    this.autoNext()
+    // this.autoNext()
   },
   methods: {
+    handleAnimationEnd() {
+      console.log('animation ended')
+    },
     next() {
-      this.current =
-        this.current === this.slides.length ? 1 : (this.current += 1)
-      console.log('this.current', this.current)
-      console.log('this.slides', this.slides)
-      const first = this.slides.shift()
-      this.slides = this.slides.concat(first)
+      this.direction = 1
+      this.currentSlideIndex =
+        this.currentSlideIndex === this.lastSlideIndex
+          ? 0
+          : (this.currentSlideIndex += 1)
       this.resetAutoNext()
     },
     previous() {
-      this.current =
-        this.current === 1 ? this.slides.length : (this.current -= 1)
-      const last = this.slides.pop()
-      this.slides = [last].concat(this.slides)
+      this.direction = -1
+      this.currentSlideIndex =
+        this.currentSlideIndex === 0
+          ? this.lastSlideIndex
+          : (this.currentSlideIndex -= 1)
       this.resetAutoNext()
+    },
+    isNextSlide(index) {
+      return (
+        index === this.currentSlideIndex + 1 ||
+        (this.currentSlideIndex === this.lastSlideIndex && index === 0)
+      )
+    },
+    isPreviousSlide(index) {
+      return (
+        index === this.currentSlideIndex - 1 ||
+        (this.currentSlideIndex === 0 && index === this.lastSlideIndex)
+      )
     },
     autoNext() {
       this.timeoutId = setTimeout(() => {
@@ -61,22 +90,31 @@ export default {
       clearTimeout(this.timeoutId)
       this.autoNext()
     },
-    imagesUrls() {
-      let urls = []
-      console.log(constants.homeSlides)
-      constants.homeSlides.forEach((imageFileName) => {
-        const path = `../images/${imageFileName}`
-        const imageUrl = new URL(path, import.meta.url).href
-        urls.push(imageUrl)
-      })
-      console.log(urls)
-      return urls
+    getSlideClass(index, currentSlideIndex, direction) {
+      if (index === currentSlideIndex) {
+        return ['Slider__slide--current']
+      }
+      if (this.isNextSlide(index)) {
+        return ['Slider__slide--next z-index-0']
+      }
+      if (this.isPreviousSlide(index)) {
+        return ['Slider__slide--previous z-index-0']
+      }
+      if (direction === -1) {
+        return ['Slider__slide--previous z-index-neg']
+      }
+      return ['Slider__slide--next z-index-neg']
     },
   },
 }
 </script>
 
 <style scoped>
+.Slider__slide-title {
+  color: white;
+  font-size: 2rem;
+  z-index: 100;
+}
 .carousel-view {
   display: flex;
   flex-direction: column;
@@ -85,20 +123,26 @@ export default {
   overflow-x: hidden;
 }
 
-.slide {
+.Slider__slide {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   transition: transform 0.4s ease-in-out;
+  position: absolute;
 }
 
-.slide:first-of-type {
-  opacity: 0;
+.Slider__slide--current {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
 }
-.slide:last-of-type {
-  opacity: 0;
+.Slider__slide--previous {
+  left: -100%;
+}
+
+.Slider__slide--next {
+  right: -100%;
 }
 
 .btn {
@@ -135,21 +179,12 @@ export default {
   }
 }
 
-.carousel-view > div > .slide:nth-child(2) > img {
+.carousel-view > div > .Slider__slide--current > img {
   animation-name: zoom;
   animation-duration: 40s;
-  z-index: -1;
 }
 
-.carousel-view > div > .slide:nth-child(3) > img {
-  animation-name: zoom;
-  animation-duration: 40s;
-  z-index: 1;
-}
-
-.carousel-view > div > .slide:nth-child(4) > img {
-  animation-name: zoom;
-  animation-duration: 40s;
-  z-index: -1;
+.carousel-view img {
+  filter: brightness(70%);
 }
 </style>

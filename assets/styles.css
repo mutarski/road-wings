@@ -20,6 +20,7 @@
 body {
   font-family: 'Open Sans', 'Bradley Hand ITC';
   margin: 0;
+  overflow-x: hidden;
 }
 
 /* Elements */
@@ -46,6 +47,10 @@ ul {
   justify-content: end;
 }
 
+.align-items-center {
+  align-items: center;
+}
+
 /* Object fit */
 
 .object-fit-cover {
@@ -67,4 +72,38 @@ ul {
 
 .h-100 {
   height: 100%;
+}
+
+/* Visibility */
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-1 {
+  opacity: 1;
+}
+
+/* Z-index */
+.z-index-neg {
+  z-index: -1;
+}
+
+.z-index-0 {
+  z-index: 0;
+}
+
+/* Position */
+.position-absolute {
+  position: absolute;
+}
+
+.position-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Text */
+.text-center {
+  text-align: center;
 }
