@@ -1,9 +1,17 @@
 <template>
   <div>
-    <Slider />
+    <Slider :items="slides" />
   </div>
 </template>
 
 <script>
-export default {}
+import constants from '../constants.js'
+
+export default {
+  data() {
+    return {
+      slides: constants.homeSlides,
+    }
+  },
+}
 </script>

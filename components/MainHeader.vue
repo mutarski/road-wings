@@ -1,5 +1,7 @@
 <script>
+import BikeAnimated from './Icons/BikeAnimated.vue'
 export default {
+  components: { BikeAnimated },
   data() {
     return {
       isMenuOpen: false,
@@ -8,7 +10,6 @@ export default {
   methods: {
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen
-      console.log('isMenuOpen?', this.isMenuOpen)
     },
   },
 }
@@ -17,19 +18,24 @@ export default {
 <template>
   <header>
     <nav class="d-flex header__nav justify-between">
-      <img class="header__logo" src="/wing.png" />
-      <ul
-        class="header__list d-flex justify-end"
-        :class="{ 'header__mobile-list': isMenuOpen }"
-      >
-        <li class="header__item"><a href="#" data-hover="RUTAS">RUTAS</a></li>
+      <img class="header__logo" src="/road-white.png" />
+      <ul class="header__list" :class="{ 'header__mobile-list': isMenuOpen }">
         <li class="header__item">
-          <a href="#" data-hover="QUIÉNES SOMOS">QUIÉNES SOMOS</a>
+          <a href="#">RUTAS</a>
+          <bike-animated></bike-animated>
         </li>
         <li class="header__item">
-          <a href="#" data-hover="CONTACTO">CONTACTO</a>
+          <a href="#">QUIÉNES SOMOS</a>
+          <bike-animated></bike-animated>
+        </li>
+        <li class="header__item">
+          <a href="#">CONTACTO</a>
+          <bike-animated></bike-animated>
         </li>
       </ul>
+      <a href="https://wa.me/34696762978" target="_blank">
+        <img class="header__whatsapp-icon" src="/whatsapp.png" />
+      </a>
       <button class="header__burger" @click="toggleMenu">
         <span class="header__burger-line"></span>
         <span class="header__burger-line"></span>
@@ -46,32 +52,35 @@ a {
   border-radius: 5px;
 }
 
-.header__logo {
-  width: 5rem;
-  height: 2rem;
-  filter: saturate(500%) contrast(800%) brightness(500%) invert(80%) sepia(50%)
-    hue-rotate(120deg);
-}
-
-.header__nav {
+header {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  bottom: 75%;
+  bottom: 80%;
   z-index: 2;
   color: #fff;
-  padding: 2rem;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   font-weight: 600;
   background-image: linear-gradient(
     to top,
-    rgba(var(--darkBlueRGB), 0),
-    rgba(var(--darkBlueRGB), 0.1),
-    rgba(var(--darkBlueRGB), 0.2),
+    rgba(var(--darkBlueRGB), 0.01),
+    rgba(var(--darkBlueRGB), 0.15),
+    rgba(var(--darkBlueRGB), 0.25),
+    rgba(var(--darkBlueRGB), 0.45),
+    rgba(var(--darkBlueRGB), 0.6),
+    rgba(var(--darkBlueRGB), 0.7),
+    rgba(var(--darkBlueRGB), 0.9),
     rgba(var(--darkBlueRGB), 1),
-    rgba(black, 1)
+    rgba(17, 22, 65, 1)
   );
+}
+
+.header__logo {
+  width: 6rem;
+  height: 6rem;
+  padding-top: 0.5rem;
+  padding-left: 2rem;
 }
 
 .header__burger {
@@ -90,63 +99,37 @@ a {
 }
 
 .header__list {
+  display: flex;
+  justify-content: center;
   text-align: center;
+  padding-top: 2.5rem;
 }
-
 .header__list * {
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .header__item {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  min-width: 9rem;
+  align-items: center;
   list-style: outside none none;
   margin: 0 1.2rem;
   overflow: hidden;
   height: fit-content;
 
-  & > a {
-    padding-right: 2.5rem;
-    padding-left: 1rem;
-    color: rgba(255, 255, 255, 0.8);
-    position: relative;
-    display: inline-block;
-    letter-spacing: 0.08rem;
+  > svg {
+    opacity: 0;
+    padding-left: 0.5rem;
   }
 
-  & > a:before,
-  a:after {
-    position: absolute;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-  }
-
-  & > a:before {
-    right: 100%;
-    width: 2rem;
-    height: 2rem;
-    content: '';
-    background-image: url('/bike.svg');
-    background-size: 2rem 2rem;
-  }
-
-  & > a:after {
-    position: absolute;
-    padding-right: 2.5rem;
-    padding-left: 1rem;
-    right: 100%;
-    top: 0;
-    content: attr(data-hover);
-    color: var(--secondary);
-    white-space: nowrap;
+  &:hover > svg {
+    opacity: 1;
   }
 }
 
-.header__item:hover > a {
-  transform: translateX(100%);
-}
-
-.header__item:hover > a:before {
-  right: 100%;
+.header__item > a:hover {
+  color: var(--secondary);
 }
 
 @media screen and (max-width: 600px) {
@@ -169,8 +152,15 @@ a {
     text-align: center;
 
     & > li {
-      padding: 2rem;
+      padding: 2.5rem;
     }
   }
+}
+
+.header__whatsapp-icon {
+  width: 2rem;
+  height: 2rem;
+  padding-top: 2.5rem;
+  padding-right: 2.5rem;
 }
 </style>
