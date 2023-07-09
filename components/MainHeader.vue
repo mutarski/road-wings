@@ -160,7 +160,12 @@ header {
 .header__whatsapp-icon {
   width: 2rem;
   height: 2rem;
-  padding-top: 2.5rem;
-  padding-right: 2.5rem;
+  margin-top: 2.5rem;
+  margin-right: 2.5rem;
+  transform-origin: bottom left;
+  &:hover {
+    animation-name: pop;
+    animation-duration: 0.5s;
+  }
 }
 </style>

@@ -1,10 +1,6 @@
 <template>
   <div class="carousel-view">
-    <transition-group
-      tag="div"
-      class="d-flex"
-      @transitionend="handleAnimationEnd"
-    >
+    <transition-group tag="div" class="d-flex">
       <div
         v-for="(slide, index) in items"
         class="Slider__slide"
@@ -43,16 +39,12 @@ export default {
       lastSlideIndex: 4,
       direction: 1,
       timeoutId: null,
-      slides: null,
     }
   },
   mounted() {
-    // this.autoNext()
+    this.autoNext()
   },
   methods: {
-    handleAnimationEnd() {
-      console.log('animation ended')
-    },
     next() {
       this.direction = 1
       this.currentSlideIndex =
@@ -168,15 +160,6 @@ export default {
 
 .btn:hover {
   transform: scale(1.1);
-}
-
-@keyframes zoom {
-  from {
-    transform: scale(1, 1);
-  }
-  to {
-    transform: scale(1.5, 1.5);
-  }
 }
 
 .carousel-view > div > .Slider__slide--current > img {
