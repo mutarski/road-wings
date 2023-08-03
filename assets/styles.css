@@ -15,6 +15,7 @@
   --light: #faf5d2;
   --darkBlue: rgb(29, 37, 112);
   --darkBlueRGB: 29, 37, 112;
+  --green: rgb(56, 186, 64);
 }
 
 body {
@@ -121,5 +122,14 @@ ul {
 @keyframes pop {
   50% {
     transform: scale(1.1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  80% {
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
   }
 }

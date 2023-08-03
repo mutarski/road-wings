@@ -1,7 +1,5 @@
 <script>
-import BikeAnimated from './Icons/BikeAnimated.vue'
 export default {
-  components: { BikeAnimated },
   data() {
     return {
       isMenuOpen: false,
@@ -17,23 +15,24 @@ export default {
 
 <template>
   <header>
-    <nav class="d-flex header__nav justify-between">
+    <nav class="header__nav">
       <img class="header__logo" src="/road-white.png" />
       <ul class="header__list" :class="{ 'header__mobile-list': isMenuOpen }">
         <li class="header__item">
-          <a href="#">RUTAS</a>
-          <bike-animated></bike-animated>
+          <a href="/vacaciones">RUTAS</a>
         </li>
         <li class="header__item">
           <a href="#">QUIÉNES SOMOS</a>
-          <bike-animated></bike-animated>
         </li>
         <li class="header__item">
-          <a href="#">CONTACTO</a>
-          <bike-animated></bike-animated>
+          <a href="#">CONTACTA</a>
         </li>
       </ul>
-      <a href="https://wa.me/34696762978" target="_blank">
+      <a
+        class="header__whatsapp-link"
+        href="https://wa.me/34609136838"
+        target="_blank"
+      >
         <img class="header__whatsapp-icon" src="/whatsapp.png" />
       </a>
       <button class="header__burger" @click="toggleMenu">
@@ -76,11 +75,17 @@ header {
   );
 }
 
+.header__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 2%;
+}
+
 .header__logo {
-  width: 6rem;
-  height: 6rem;
+  width: 9rem;
+  height: 9rem;
   padding-top: 0.5rem;
-  padding-left: 2rem;
 }
 
 .header__burger {
@@ -88,21 +93,24 @@ header {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  margin-top: 1.7rem;
 }
 
 .header__burger-line {
   display: block;
-  width: 20px;
-  height: 2px;
-  margin: 5px 0;
-  background-color: var(--secondary);
+  border-radius: 0.2rem;
+  width: 2.2rem;
+  height: 0.15rem;
+  margin: 0.55rem 0;
+  background-color: black;
+  box-shadow: 0px 0px 0.3rem 0.1rem #f2e1f2;
 }
 
 .header__list {
   display: flex;
   justify-content: center;
   text-align: center;
-  padding-top: 2.5rem;
+  margin-top: 3rem;
 }
 .header__list * {
   transition: all 0.5s ease;
@@ -111,20 +119,20 @@ header {
 .header__item {
   display: flex;
   justify-content: center;
-  min-width: 9rem;
-  align-items: center;
+  min-width: 8rem;
   list-style: outside none none;
-  margin: 0 1.2rem;
-  overflow: hidden;
+  margin: 0 1rem;
   height: fit-content;
 
   > svg {
+    display: none;
     opacity: 0;
     padding-left: 0.5rem;
   }
 
   &:hover > svg {
     opacity: 1;
+    display: block;
   }
 }
 
@@ -132,9 +140,34 @@ header {
   color: var(--secondary);
 }
 
-@media screen and (max-width: 600px) {
+.header__whatsapp-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  margin: 1.3rem;
+  background: var(--green);
+  border-radius: 50%;
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+}
+
+.header__whatsapp-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  &:hover {
+    animation-name: pop;
+    animation-duration: 0.5s;
+  }
+}
+
+@media screen and (max-width: 760px) {
   .header__list {
     display: none;
+    margin-top: 0;
   }
   .header__burger {
     display: block;
@@ -155,17 +188,21 @@ header {
       padding: 2.5rem;
     }
   }
-}
 
-.header__whatsapp-icon {
-  width: 2rem;
-  height: 2rem;
-  margin-top: 2.5rem;
-  margin-right: 2.5rem;
-  transform-origin: bottom left;
-  &:hover {
-    animation-name: pop;
-    animation-duration: 0.5s;
+  .header__logo {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .header__whatsapp-link {
+    margin-top: 1.6rem;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .header__whatsapp-icon {
+    width: 2rem;
+    height: 2rem;
   }
 }
 </style>
