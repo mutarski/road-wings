@@ -1,5 +1,10 @@
 <template>
-  <div class="carousel-view">
+  <div
+    class="carousel-view"
+    @touchstart="onTouchStart"
+    @touchend="onTouchEnd"
+    @touchmove.prevent
+  >
     <transition-group tag="div" class="d-flex">
       <div
         v-for="(slide, index) in items"
@@ -97,6 +102,21 @@ export default {
       }
       return ['Slider__slide--next z-index-neg']
     },
+    onTouchStart(event) {
+      this.startX = event.changedTouches[0].clientX
+    },
+    onTouchEnd(event) {
+      this.endX = event.changedTouches[0].clientX
+
+      if (this.endX > this.startX) {
+        console.log('go previous')
+        this.previous()
+      }
+      if (this.endX < this.startX) {
+        console.log('go next')
+        this.next()
+      }
+    },
   },
 }
 </script>
@@ -169,5 +189,11 @@ export default {
 
 .carousel-view img {
   filter: brightness(70%);
+}
+
+@media screen and (max-width: 600px) {
+  .btn {
+    opacity: 0;
+  }
 }
 </style>
